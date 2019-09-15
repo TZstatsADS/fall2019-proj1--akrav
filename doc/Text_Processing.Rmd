@@ -25,6 +25,10 @@ From the packages' descriptions:
 + `DT` provides an R interface to the JavaScript library DataTables.
 
 ```{r load libraries, warning=FALSE, message=FALSE}
+install.packages("tm")
+install.packages("data.table")
+install.packages("tidyverse")
+install.packages("DT")
 library(tm)
 library(data.table)
 library(tidytext)
