@@ -1,0 +1,41 @@
+Lines 21-25:
+	Load in and import packages (Only need to download "pacman")
+
+Lines 32-34:
+	Load processed lyrics which were processed from the Text_preprocess.rmd file in doc
+
+Lines 36-41: 
+	Break up lyrics from the stemmedwords column so that each row conatins the words of each son instead. Then we counted and sorted all the words that appeared.
+
+Lines 44-83:
+	Break up the main dataframe into multiple dataframs spilt by decades and genre. Each graph is then counted, as well as adding a perecentage column giving each words its relative percentage out of all the words ong the graph.
+
+Lines 94-157: 
+	Joined the 60s and 70s dataframes and the 2000s and 2010s dataframe and made a jitter scatter plot comparing the frequencies (percentages) of the words used in each pair of decades.
+
+Lines 134-146: 
+	Graph 2 graphs of the 60s and 70s pair and the 2000s and 2010s pair
+
+Lines 164-234:
+	Graph pie charts of each of the decades comparing the top 10 words percentages vs the rest of the words percentages
+
+Lines 250-313:  
+	Graph bar graphs of each of the decades the top 10 words and their percentages
+
+Lines 340-362: 
+	Rock vs. Pop a jitter scatter plot comparing the frequencies (percentages) of the words used in the genres.
+
+Lines 365-386: 
+	Graph bar graphs of  Rock and Pop  with there top 10 words and their percentages
+
+Line 398-491:
+	Word CLouds for all genres using word_cloud_num as the number of words to use in the word cloud.
+
+Lines 521-542: 
+	Graph bar graphs of  Rock and Pop  with there top 10 words and their percentages
+
+Lines 550-653: 
+	Graph bar graphs of all the genres with there top 10 words and their percentages
+
+Lines 656-791:
+	Graph pie charts of each of the genre comparing the top 10 words percentages vs the rest of the words percentages

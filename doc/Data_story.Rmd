@@ -29,17 +29,11 @@ pacman::p_load( dplyr, GGally, ggplot2, ggthemes, ggvis, httr, lubridate, plotly
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
-# loads in the processed data after it went throught Text_Processing.Rmd
-
 load('../output/processed_lyrics.RData')
 ```
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
-# Seperates all the stemmed lyrics so that each word has a row
-#Then counts all the same words and then organize the rows by size
-
 tidy_lyrics <- dt_lyrics %>%
   unnest_tokens(word,stemmedwords)
 tidy_lyrics_count <- tidy_lyrics %>%
@@ -48,11 +42,6 @@ tidy_lyrics_count <- tidy_lyrics %>%
 
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
-
-#Seperates all the data by decade and genres give them the name tidy_lyrics_[what it is specifically]
-
-#All the tables count and sort all the words and a new column was add that gets the percentage of each word out of all the words in its respective table
-
 tidy_lyrics_60s <- tidy_lyrics[tidy_lyrics$year>1959 & tidy_lyrics$year<1970,]
 tidy_lyrics_70s <- tidy_lyrics[tidy_lyrics$year>1969 & tidy_lyrics$year<1980,]
 tidy_lyrics_80s <- tidy_lyrics[tidy_lyrics$year>1979 & tidy_lyrics$year>1990,] 
@@ -93,7 +82,7 @@ tidy_lyrics_rb_count <- tidy_lyrics_rb %>% count(word, sort= TRUE) %>%  mutate(p
 tidy_lyrics_folk_count <- tidy_lyrics_folk %>% count(word, sort= TRUE) %>%  mutate(percentage = n / sum(n) * 100)
 ```
 
-&nbsp;  
+&nbsp;  ;
 
 Music is part of almost everyone’s everyday life. Everyone has a song they like, a genre they prefer, and a decade of music they like the most. But, people get so opinionated about the music that they listen to, so much so that there is even a common motif in entertainment how older adults comment about how songs today are not as good as the songs they grew up listening to. As someone who grew up, almost exclusively, listening to my parents favorite music (music from the 1960s and the 1970s), I would generally agree with that motif as well, although my opinion on that seems to be changing. However, my general reasoning for why I prefer older songs is because I think older songs from the 1960s and 70s tend to be less repetitive (at least lyrically) than the songs from the 2000s and 2010s. So my first question is:
 
@@ -104,11 +93,8 @@ I’m going to show this by first finding and comparing the frequency of the top
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
 
-#We are combining 60s and 70s data into 1 table and combining 00s and 10s data into another data
-#We add a column called data to specify which years we are looking at
-#we then sort them by words them reorganize it so we are grouping by decade
-#Then we compare frequencies by making a jitter graph
 # Code to make this graph was used from http://tzstatsads.github.io/tutorials/proj1_jiaqianyu.html
+
 
 freq60s_70s <- bind_rows(tidy_lyrics_60s,
                          tidy_lyrics_70s)
@@ -146,9 +132,6 @@ ggplot(frequency,
 
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
-#Making bar graphs with bins being equal to the number of bars in the bar graph we want
-#We add a percentage column to these tables and graph a word and its percent frequency
-
 bins =20
 graph_60s_70s <- freq60s_70s %>% 
   count(word, sort= TRUE) %>%  
@@ -170,16 +153,16 @@ graph_00s_10s <- freq00s_10s %>%
   geom_col(fill = rainbow(bins)) +
   xlab(NULL) 
 grid.arrange(graph_60s_70s, graph_00s_10s)
+
 ```
+
+
 
 You can tell from the two plots it seems that the frequency of each topic (words) from these decades are relatively similar. The big difference is that the most frequent word from the 1960s and 1970s appears 3% of the time, while the most frequent word from the 2000s and 2010s appears about 2% of the time. So it seems that songs from the past seem to be more repetitive than songs from today. However, to get a more clear picture if songs are becoming more repetitive, lets compare the frequency graphs of each decade and see the percentage of their top 10 most frequently used words and see how much the frequency changes as the decades change.
 
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
-#make a Pie chart for each decade by making one table hold the top 10 word and another table to hold the rest of the word
-#The percentage is summed up and rounded to the nearest whole percent
-#Then make the graph look pretty and graph
-#found how to do it here: https://www.statmethods.net/graphs/pie.html
+# using code structure from https://www.statmethods.net/graphs/pie.html to help make pie charts
 
 top_words= 10
 
@@ -250,6 +233,7 @@ pie(slices,labels = lbls, col=rainbow(length(lbls)),
 
 ```
 
+
 Note that the 1960s date seems to be skewed, and after some investigation I found that the dataset for the 1960s only has 40 songs while the rest of the decade have at least 10,000 songs. 
 
 Decade by decade you can see that the most frequently used words seem to be pretty consistent, where the most used words appear about 9% of the time per decade. If any change is happening it seems that the 1970s is the most repetitive decade, where the top 10 most frequent words appear 10% of the time. The next decades drops to using its top 10 most frequent word only 8% of the time or 9% of the time.
@@ -264,9 +248,6 @@ Another argument that people have of why older songs are better is because older
 
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
-#Making bar graphs for each decade with bins being equal to the number of bars in the bar graph we want
-#We add a percentage column to these tables and graph a word and its percent frequency
-
 bins = 10
 
 graph_60s <- tidy_lyrics_60s_count %>%
@@ -300,10 +281,6 @@ grid.arrange(graph_60s, graph_70s, graph_80s)
 
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
-
-#Making bar graphs for each decade with bins being equal to the number of bars in the bar graph we want
-#We add a percentage column to these tables and graph a word and its percent frequency
-
 bins = 10
 
 graph_90s <-tidy_lyrics_90s_count %>%
@@ -332,7 +309,9 @@ graph_10s <-tidy_lyrics_10s_count %>%
 
 grid.arrange(graph_90s, graph_00s, graph_10s)
 
+
 ```
+
 
 
 It seems that all the decades seem to talk about the same topics. All talk about love and I assume "spend" "time" with their "baby" 3 more words that are all in the top 10 in every decade we are looking at. So since all the decades seem to talk about the same similar topics, the next thing we can check is how often they talk about those topics. As stated before, later decades seem to be talking about their most frequent topics less, as you can tell from looking at the pie chart which goes from 10% in the 70s to 8% and 9% all the way to the 2010s.
@@ -357,11 +336,6 @@ But first lets compare the word/topic frequencies and topics of rock and pop to 
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
 
-#We are combining rock data into 1 table and combining pop data into another data
-#We add a column called data to specify which genre we are looking at
-#we then sort them by words them reorganize it so we are grouping by decade
-#Then we compare frequencies by making a jitter graph
-# Code to make this graph was used from http://tzstatsads.github.io/tutorials/proj1_jiaqianyu.html
 
 frequency <- bind_rows(mutate(tidy_lyrics_rock, genre = "Rock"),
                        mutate(tidy_lyrics_pop, genre = "Pop")) %>% 
@@ -389,13 +363,10 @@ ggplot(frequency,
 
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
-#Making bar graphs for pop and rock music with bins being equal to the number of bars in the bar graph we want
-#We add a percentage column to these tables and graph a word and its percent frequency
-
-bins=10
+bins=11
 
 graph_pop <- tidy_lyrics_pop_count %>%
-  filter(row_number() <= bins) %>%
+  filter(row_number() < bins) %>%
   mutate(word = reorder(word, percentage)) %>%
   ggplot(aes(word, percentage)) +
   labs(title="Pop Top 10 Word Percentages") +
@@ -404,7 +375,7 @@ graph_pop <- tidy_lyrics_pop_count %>%
 
 
 graph_rock <-tidy_lyrics_rock_count %>%
-  filter(row_number() <= bins) %>%
+  filter(row_number() < bins) %>%
   mutate(word = reorder(word, percentage)) %>%
   ggplot(aes(word, percentage)) +
   labs(title="Rock Top 10 Word Percentages") +
@@ -428,7 +399,7 @@ To compare each genre more easily we are going to look at word clouds and compar
 
 word_cloud_num=40
 #The code for the title was taken from https://stackoverflow.com/questions/15224913/r-add-title-to-wordcloud-graphics-png
-#make a word cloud of each genre using the words and frequency numbers
+
 
 layout(matrix(c(1, 2), nrow=2), heights=c(1, 4))
 par(mar=rep(0, 4))
@@ -548,10 +519,6 @@ Lets look at the frequency of each genres top 10 most used words
 
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
-
-#Making bar graphs for all genres music with bins being 1 more than to the number of bars in the bar graph we want
-#We add a percentage column to these tables and graph a word and its percent frequency
-
 bins=11
 
 graph_pop <- tidy_lyrics_pop_count %>%
@@ -687,11 +654,7 @@ grid.arrange( graph_na, graph_electric, graph_rb, graph_folk,graph_indie, graph_
 
 
 ```{r,warning=FALSE, message=FALSE,echo=FALSE}
-
-#make a Pie chart for each genre by making one table hold the top 10 word and another table to hold the rest of the word
-#The percentage is summed up and rounded to the nearest whole percent
-#Then make the graph look pretty and graph
-#found how to do it here: https://www.statmethods.net/graphs/pie.html
+# using code structure from https://www.statmethods.net/graphs/pie.html to help make pie charts
 
 top_words= 10
 
