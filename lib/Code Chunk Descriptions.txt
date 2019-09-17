@@ -7,35 +7,35 @@ Lines 32-34:
 Lines 36-41: 
 	Break up lyrics from the stemmedwords column so that each row conatins the words of each son instead. Then we counted and sorted all the words that appeared.
 
-Lines 44-83:
+Lines 44-85:
 	Break up the main dataframe into multiple dataframs spilt by decades and genre. Each graph is then counted, as well as adding a perecentage column giving each words its relative percentage out of all the words ong the graph.
 
-Lines 94-157: 
+Lines 96-130: 
 	Joined the 60s and 70s dataframes and the 2000s and 2010s dataframe and made a jitter scatter plot comparing the frequencies (percentages) of the words used in each pair of decades.
 
-Lines 134-146: 
-	Graph 2 graphs of the 60s and 70s pair and the 2000s and 2010s pair
+Lines 136-161: 
+	Graph 2 graphs of the 60s and 70s pair and the 2000s and 2010s pair top 10 words
 
-Lines 164-234:
+Lines 168-240:
 	Graph pie charts of each of the decades comparing the top 10 words percentages vs the rest of the words percentages
 
-Lines 250-313:  
+Lines 256-321:  
 	Graph bar graphs of each of the decades the top 10 words and their percentages
 
-Lines 340-362: 
+Lines 345-371: 
 	Rock vs. Pop a jitter scatter plot comparing the frequencies (percentages) of the words used in the genres.
 
-Lines 365-386: 
+Lines 374-396: 
 	Graph bar graphs of  Rock and Pop  with there top 10 words and their percentages
 
-Line 398-491:
+Line 408-503:
 	Word CLouds for all genres using word_cloud_num as the number of words to use in the word cloud.
 
-Lines 521-542: 
+Lines 533-556: 
 	Graph bar graphs of  Rock and Pop  with there top 10 words and their percentages
 
-Lines 550-653: 
+Lines 564-669: 
 	Graph bar graphs of all the genres with there top 10 words and their percentages
 
-Lines 656-791:
+Lines 672-791:
 	Graph pie charts of each of the genre comparing the top 10 words percentages vs the rest of the words percentages
